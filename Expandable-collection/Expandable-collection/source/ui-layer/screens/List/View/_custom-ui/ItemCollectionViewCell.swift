@@ -13,6 +13,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var itemContainerView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     
+    // MARK: - Life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         self.configureUi()
@@ -22,6 +23,17 @@ class ItemCollectionViewCell: UICollectionViewCell {
         self.titleLabel.text = nil
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.round(cornerRadius: Constants.cornerRadius)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.setNeedsDisplay()
+    }
+    
+    // MARK: - Configurations
     func configure(with title: String) {
         self.titleLabel.text = title
     }
@@ -30,6 +42,14 @@ class ItemCollectionViewCell: UICollectionViewCell {
 private extension ItemCollectionViewCell {
     
     func configureUi() {
-        self.itemContainerView.backgroundColor = UIColor.yellow
+        self.itemContainerView.backgroundColor = UIColor.orange
+        self.titleLabel.textColor = UIColor.white
+    }
+}
+
+// MARK: - Constants
+private extension ItemCollectionViewCell {
+    enum Constants {
+        static let cornerRadius: CGFloat = 8
     }
 }

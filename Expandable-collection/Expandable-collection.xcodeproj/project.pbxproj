@@ -17,6 +17,8 @@
 		4F220F992444992D007EE0FE /* ListDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F220F982444992D007EE0FE /* ListDependencyContainer.swift */; };
 		4F220FA12444A21E007EE0FE /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F220F9F2444A21E007EE0FE /* ItemCollectionViewCell.swift */; };
 		4F220FA22444A21E007EE0FE /* ItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F220FA02444A21E007EE0FE /* ItemCollectionViewCell.xib */; };
+		4F220FA42444A967007EE0FE /* ItemsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F220FA32444A967007EE0FE /* ItemsCollectionView.swift */; };
+		4F220FA72444AC0D007EE0FE /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F220FA62444AC0D007EE0FE /* UIView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		4F220F982444992D007EE0FE /* ListDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDependencyContainer.swift; sourceTree = "<group>"; };
 		4F220F9F2444A21E007EE0FE /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F220FA02444A21E007EE0FE /* ItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		4F220FA32444A967007EE0FE /* ItemsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionView.swift; sourceTree = "<group>"; };
+		4F220FA62444AC0D007EE0FE /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 		4F220F7F24448E6D007EE0FE /* source */ = {
 			isa = PBXGroup;
 			children = (
+				4F220FA52444ABF2007EE0FE /* extensions */,
 				4F220F8624448E6D007EE0FE /* AppDelegate.swift */,
 				4F220F8324448E6D007EE0FE /* support-files */,
 				4F220F8024448E6D007EE0FE /* ui-layer */,
@@ -147,8 +152,17 @@
 			children = (
 				4F220F9F2444A21E007EE0FE /* ItemCollectionViewCell.swift */,
 				4F220FA02444A21E007EE0FE /* ItemCollectionViewCell.xib */,
+				4F220FA32444A967007EE0FE /* ItemsCollectionView.swift */,
 			);
 			path = "_custom-ui";
+			sourceTree = "<group>";
+		};
+		4F220FA52444ABF2007EE0FE /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4F220FA62444AC0D007EE0FE /* UIView+Extensions.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,8 +240,10 @@
 				4F220F9124448F48007EE0FE /* ListViewController.swift in Sources */,
 				4F220F8A24448E6D007EE0FE /* AppDelegate.swift in Sources */,
 				4F220F9424448F8F007EE0FE /* ListViewModel.swift in Sources */,
+				4F220FA42444A967007EE0FE /* ItemsCollectionView.swift in Sources */,
 				4F220FA12444A21E007EE0FE /* ItemCollectionViewCell.swift in Sources */,
 				4F220F96244490E9007EE0FE /* ListModel.swift in Sources */,
+				4F220FA72444AC0D007EE0FE /* UIView+Extensions.swift in Sources */,
 				4F220F992444992D007EE0FE /* ListDependencyContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

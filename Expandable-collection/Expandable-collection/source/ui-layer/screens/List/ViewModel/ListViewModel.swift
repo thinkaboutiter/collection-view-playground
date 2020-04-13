@@ -16,6 +16,7 @@ protocol ListViewModelConsumer: AnyObject {
 protocol ListViewModel: AnyObject {
     func setViewModelConsumer(_ newValue: ListViewModelConsumer)
     func items() -> [String]
+    func item(at indexPath: IndexPath) -> String?
 }
 
 class ListViewModelImpl: ListViewModel, ListModelConsumer {
@@ -42,6 +43,18 @@ class ListViewModelImpl: ListViewModel, ListModelConsumer {
     
     func items() -> [String] {
         return self.model.items()
+    }
+    
+    func item(at indexPath: IndexPath) -> String? {
+        let range: Range<Int> = 0..<self.items().count
+        let index: Int = indexPath.item
+        guard range ~= index else {
+            let message: String = "index=\(index) out of range=\(range)!"
+            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+            return nil
+        }
+        let result: String = self.items()[index]
+        return result
     }
     
     // MARK: - ListModelConsumer protocol
