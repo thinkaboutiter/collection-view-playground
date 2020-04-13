@@ -29,6 +29,8 @@ class ListViewController: UIViewController, ListViewModelConsumer {
         }
     }
     
+    var selectedIndexPath: IndexPath? = nil
+    
     // MARK: - Initialization
     @available(*, unavailable, message: "Creating this view controller with `init(coder:)` is unsupported in favor of initializer dependency injection.")
     required init?(coder aDecoder: NSCoder) {
@@ -94,7 +96,16 @@ extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath)
     {
-        collectionView.deselectItem(at: indexPath, animated: true)
+        UIView.animate(withDuration: 0.5) {
+            if indexPath == self.selectedIndexPath {
+                self.selectedIndexPath = nil
+            }
+            else {
+                self.selectedIndexPath = indexPath
+            }
+            collectionView.collectionViewLayout.invalidateLayout()
+        }
+        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
     }
 }
 
@@ -105,10 +116,22 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return self.itemSize(for: collectionView)
+        return self.itemSize(for: collectionView, at: indexPath)
     }
     
-    fileprivate func itemSize(for collectionView: UICollectionView) -> CGSize {
+    private func itemSize(for collectionView: UICollectionView, at indexPath: IndexPath) -> CGSize {
+        var result: CGSize = self.itemSize(for: collectionView)
+        guard let selectedIndexPath = self.selectedIndexPath else {
+            return result
+        }
+        if selectedIndexPath == indexPath {
+            result = self.expandedItemSize(for: collectionView,
+                                           widthExpandOverNumberOfCells: 2)
+        }
+        return result
+    }
+    
+    private func itemSize(for collectionView: UICollectionView) -> CGSize {
         guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
             let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
             debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
@@ -123,9 +146,29 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
             ) / CGFloat(valid_dimensionsProvider.itemsPerRow)
         
         let item_height: CGFloat = item_width / valid_dimensionsProvider.itemWidthToHeightRatio
-        
         return CGSize(width: item_width, height: item_height)
     }
+    
+    private func expandedItemSize(for collectionView: UICollectionView,
+                                  widthExpandOverNumberOfCells: UInt) -> CGSize
+    {
+        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
+            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
+            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+            return CGSize.zero
+        }
+        
+        let item_width: CGFloat = (
+            collectionView.bounds.width
+                - valid_dimensionsProvider.paddingLeft
+                - valid_dimensionsProvider.paddingRight
+                - CGFloat(valid_dimensionsProvider.itemsPerRow - widthExpandOverNumberOfCells) * valid_dimensionsProvider.minimumInteritemSpacing
+            ) / CGFloat(valid_dimensionsProvider.itemsPerRow)
+        
+        let item_height: CGFloat = item_width / valid_dimensionsProvider.itemWidthToHeightRatio
+        return CGSize(width: item_width * CGFloat(widthExpandOverNumberOfCells), height: item_height)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
