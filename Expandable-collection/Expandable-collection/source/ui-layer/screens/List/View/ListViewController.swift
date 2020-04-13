@@ -96,16 +96,7 @@ extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath)
     {
-        UIView.animate(withDuration: 0.5) {
-            if indexPath == self.selectedIndexPath {
-                self.selectedIndexPath = nil
-            }
-            else {
-                self.selectedIndexPath = indexPath
-            }
-            collectionView.collectionViewLayout.invalidateLayout()
-        }
-        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
@@ -120,55 +111,29 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     private func itemSize(for collectionView: UICollectionView, at indexPath: IndexPath) -> CGSize {
-        var result: CGSize = self.itemSize(for: collectionView)
-        guard let selectedIndexPath = self.selectedIndexPath else {
-            return result
+        guard let provider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
+            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
+            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+            return CGSize.zero
         }
-        if selectedIndexPath == indexPath {
-            result = self.expandedItemSize(for: collectionView,
-                                           widthExpandOverNumberOfCells: 2)
-        }
+        let result: CGSize = self.itemSize(for: provider,
+                                           totalWidth: collectionView.bounds.width)
         return result
     }
     
-    private func itemSize(for collectionView: UICollectionView) -> CGSize {
-        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
-            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
-            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
-            return CGSize.zero
-        }
-        
+    private func itemSize(for provider: CollectionViewDimensionsProvider,
+                          totalWidth: CGFloat) -> CGSize
+    {
         let item_width: CGFloat = (
-            collectionView.bounds.width
-                - valid_dimensionsProvider.paddingLeft
-                - valid_dimensionsProvider.paddingRight
-                - CGFloat(valid_dimensionsProvider.itemsPerRow - 1) * valid_dimensionsProvider.minimumInteritemSpacing
-            ) / CGFloat(valid_dimensionsProvider.itemsPerRow)
+            totalWidth
+                - provider.paddingLeft
+                - provider.paddingRight
+                - CGFloat(provider.itemsPerRow - 1) * provider.minimumInteritemSpacing
+            ) / CGFloat(provider.itemsPerRow)
         
-        let item_height: CGFloat = item_width / valid_dimensionsProvider.itemWidthToHeightRatio
+        let item_height: CGFloat = item_width / provider.itemWidthToHeightRatio
         return CGSize(width: item_width, height: item_height)
     }
-    
-    private func expandedItemSize(for collectionView: UICollectionView,
-                                  widthExpandOverNumberOfCells: UInt) -> CGSize
-    {
-        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
-            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
-            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
-            return CGSize.zero
-        }
-        
-        let item_width: CGFloat = (
-            collectionView.bounds.width
-                - valid_dimensionsProvider.paddingLeft
-                - valid_dimensionsProvider.paddingRight
-                - CGFloat(valid_dimensionsProvider.itemsPerRow - widthExpandOverNumberOfCells) * valid_dimensionsProvider.minimumInteritemSpacing
-            ) / CGFloat(valid_dimensionsProvider.itemsPerRow)
-        
-        let item_height: CGFloat = item_width / valid_dimensionsProvider.itemWidthToHeightRatio
-        return CGSize(width: item_width * CGFloat(widthExpandOverNumberOfCells), height: item_height)
-    }
-    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
