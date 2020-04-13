@@ -16,6 +16,7 @@ protocol ListModelConsumer: AnyObject {
 /// APIs for `Model` to expose to `ViewModel`
 protocol ListModel: AnyObject {
     func setModelConsumer(_ newValue: ListModelConsumer)
+    func items() -> [String]
 }
 
 class ListModelImpl: ListModel {
@@ -36,4 +37,10 @@ class ListModelImpl: ListModel {
     func setModelConsumer(_ newValue: ListModelConsumer) {
         self.modelConsumer = newValue
     }
+    
+    func items() -> [String] {
+        return words
+    }
 }
+
+private let words: [String] = "est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac".components(separatedBy: " ")

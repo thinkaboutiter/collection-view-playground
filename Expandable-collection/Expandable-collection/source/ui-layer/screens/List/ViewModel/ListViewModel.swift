@@ -15,6 +15,7 @@ protocol ListViewModelConsumer: AnyObject {
 /// APIs for `ViewModel` to expose to `View`
 protocol ListViewModel: AnyObject {
     func setViewModelConsumer(_ newValue: ListViewModelConsumer)
+    func items() -> [String]
 }
 
 class ListViewModelImpl: ListViewModel, ListModelConsumer {
@@ -37,6 +38,10 @@ class ListViewModelImpl: ListViewModel, ListModelConsumer {
     // MARK: - ListViewModel protocol
     func setViewModelConsumer(_ newValue: ListViewModelConsumer) {
         self.viewModelConsumer = newValue
+    }
+    
+    func items() -> [String] {
+        return self.model.items()
     }
     
     // MARK: - ListModelConsumer protocol
