@@ -15,6 +15,8 @@
 		4F220F9424448F8F007EE0FE /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F220F9324448F8F007EE0FE /* ListViewModel.swift */; };
 		4F220F96244490E9007EE0FE /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F220F95244490E9007EE0FE /* ListModel.swift */; };
 		4F220F992444992D007EE0FE /* ListDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F220F982444992D007EE0FE /* ListDependencyContainer.swift */; };
+		4F220FA12444A21E007EE0FE /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F220F9F2444A21E007EE0FE /* ItemCollectionViewCell.swift */; };
+		4F220FA22444A21E007EE0FE /* ItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F220FA02444A21E007EE0FE /* ItemCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		4F220F9324448F8F007EE0FE /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		4F220F95244490E9007EE0FE /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		4F220F982444992D007EE0FE /* ListDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDependencyContainer.swift; sourceTree = "<group>"; };
+		4F220F9F2444A21E007EE0FE /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		4F220FA02444A21E007EE0FE /* ItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 		4F220F8C24448EC5007EE0FE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4F220F9E2444A21E007EE0FE /* _custom-ui */,
 				4F220F8F24448F48007EE0FE /* ListViewController.swift */,
 				4F220F9024448F48007EE0FE /* ListViewController.xib */,
 			);
@@ -135,6 +140,15 @@
 				4F220F95244490E9007EE0FE /* ListModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		4F220F9E2444A21E007EE0FE /* _custom-ui */ = {
+			isa = PBXGroup;
+			children = (
+				4F220F9F2444A21E007EE0FE /* ItemCollectionViewCell.swift */,
+				4F220FA02444A21E007EE0FE /* ItemCollectionViewCell.xib */,
+			);
+			path = "_custom-ui";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F220F7524448D37007EE0FE /* Assets.xcassets in Resources */,
+				4F220FA22444A21E007EE0FE /* ItemCollectionViewCell.xib in Resources */,
 				4F220F8824448E6D007EE0FE /* LaunchScreen.storyboard in Resources */,
 				4F220F9224448F48007EE0FE /* ListViewController.xib in Resources */,
 			);
@@ -211,6 +226,7 @@
 				4F220F9124448F48007EE0FE /* ListViewController.swift in Sources */,
 				4F220F8A24448E6D007EE0FE /* AppDelegate.swift in Sources */,
 				4F220F9424448F8F007EE0FE /* ListViewModel.swift in Sources */,
+				4F220FA12444A21E007EE0FE /* ItemCollectionViewCell.swift in Sources */,
 				4F220F96244490E9007EE0FE /* ListModel.swift in Sources */,
 				4F220F992444992D007EE0FE /* ListDependencyContainer.swift in Sources */,
 			);
