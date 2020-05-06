@@ -25,7 +25,9 @@ class ItemCollectionViewCell: UICollectionViewCell {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.round(cornerRadius: Constants.cornerRadius)
+        self.round(cornerRadius: Constants.cornerRadius,
+                   borderWidth: 2,
+                   borderColor: UIColor.black)
     }
     
     override func layoutSubviews() {

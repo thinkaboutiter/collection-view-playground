@@ -26,6 +26,7 @@ class ListViewController: UIViewController, ListViewModelConsumer {
                                               forCellWithReuseIdentifier: identifier)
             self.itemsCollectionView.delegate = self
             self.itemsCollectionView.dataSource = self
+            self.itemsCollectionView.isPagingEnabled = true
         }
     }
     
@@ -107,7 +108,8 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return self.itemSize(for: collectionView, at: indexPath)
+        return collectionView.bounds.size
+//        return self.itemSize(for: collectionView, at: indexPath)
     }
     
     private func itemSize(for collectionView: UICollectionView, at indexPath: IndexPath) -> CGSize {
@@ -139,35 +141,38 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets
     {
-        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
-            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
-            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
-            return UIEdgeInsets.zero
-        }
-        return valid_dimensionsProvider.sectionEdgeInsets
+        return UIEdgeInsets.zero
+//        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
+//            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
+//            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+//            return UIEdgeInsets.zero
+//        }
+//        return valid_dimensionsProvider.sectionEdgeInsets
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
     {
-        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
-            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
-            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
-            return 0
-        }
-        return valid_dimensionsProvider.minimumInteritemSpacing
+        return 0
+//        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
+//            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
+//            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+//            return 0
+//        }
+//        return valid_dimensionsProvider.minimumInteritemSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat
     {
-        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
-            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
-            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
-            return 0
-        }
-        return valid_dimensionsProvider.minimumLineSpacing
+        return 0
+//        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
+//            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
+//            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+//            return 0
+//        }
+//        return valid_dimensionsProvider.minimumLineSpacing
     }
 }

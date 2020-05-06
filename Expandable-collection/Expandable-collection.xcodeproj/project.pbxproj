@@ -77,8 +77,8 @@
 		4F220F7F24448E6D007EE0FE /* source */ = {
 			isa = PBXGroup;
 			children = (
-				4F220FA52444ABF2007EE0FE /* extensions */,
 				4F220F8624448E6D007EE0FE /* AppDelegate.swift */,
+				4F220FA52444ABF2007EE0FE /* extensions */,
 				4F220F8324448E6D007EE0FE /* support-files */,
 				4F220F8024448E6D007EE0FE /* ui-layer */,
 			);
