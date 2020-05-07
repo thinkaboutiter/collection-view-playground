@@ -27,6 +27,12 @@ class ListViewController: UIViewController, ListViewModelConsumer {
             self.itemsCollectionView.delegate = self
             self.itemsCollectionView.dataSource = self
             self.itemsCollectionView.isPagingEnabled = true
+            let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+            flowLayout.itemSize = self.itemsCollectionView.bounds.size
+            flowLayout.sectionInset = UIEdgeInsets.zero
+            flowLayout.minimumInteritemSpacing = 0
+            flowLayout.minimumLineSpacing = 0
+            self.itemsCollectionView.collectionViewLayout = flowLayout
         }
     }
     
@@ -107,6 +113,7 @@ extension ListViewController: UICollectionViewDelegate {
     }
 }
 
+/*
 // MARK: - UICollectionViewDelegateFlowLayout protocol
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     
@@ -182,3 +189,4 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
 //        return valid_dimensionsProvider.minimumLineSpacing
     }
 }
+*/
