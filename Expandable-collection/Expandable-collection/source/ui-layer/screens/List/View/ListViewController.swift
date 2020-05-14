@@ -113,16 +113,23 @@ extension ListViewController: UICollectionViewDelegate {
     }
 }
 
-/*
 // MARK: - UICollectionViewDelegateFlowLayout protocol
 extension ListViewController: UICollectionViewDelegateFlowLayout {
+    
+    private var isFullScreenPreviewEnabled: Bool {
+        return true
+    }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return collectionView.bounds.size
-//        return self.itemSize(for: collectionView, at: indexPath)
+        if self.isFullScreenPreviewEnabled {
+             return collectionView.bounds.size
+        }
+        else {
+            return self.itemSize(for: collectionView, at: indexPath)
+        }
     }
     
     private func itemSize(for collectionView: UICollectionView, at indexPath: IndexPath) -> CGSize {
@@ -154,39 +161,51 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets
     {
-        return UIEdgeInsets.zero
-//        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
-//            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
-//            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
-//            return UIEdgeInsets.zero
-//        }
-//        return valid_dimensionsProvider.sectionEdgeInsets
+        if self.isFullScreenPreviewEnabled {
+             return UIEdgeInsets.zero
+        }
+        else {
+            guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
+                let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
+                debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+                return UIEdgeInsets.zero
+            }
+            return valid_dimensionsProvider.sectionEdgeInsets
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
     {
-        return 0
-//        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
-//            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
-//            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
-//            return 0
-//        }
-//        return valid_dimensionsProvider.minimumInteritemSpacing
+        if self.isFullScreenPreviewEnabled {
+             return 0
+        }
+        else {
+            guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
+                let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
+                debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+                return 0
+            }
+            return valid_dimensionsProvider.minimumInteritemSpacing
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat
     {
-        return 0
-//        guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
-//            let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
-//            debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
-//            return 0
-//        }
-//        return valid_dimensionsProvider.minimumLineSpacing
+        if self.isFullScreenPreviewEnabled {
+             return 0
+        }
+        else {
+            guard let valid_dimensionsProvider: CollectionViewDimensionsProvider = collectionView as? CollectionViewDimensionsProvider else {
+                let message: String = "Unable to obtain valid \(String(describing: CollectionViewDimensionsProvider.self)) object!"
+                debugPrint("❌ \(#file) » \(#function) » \(#line)", message, separator: "\n")
+                return 0
+            }
+            return valid_dimensionsProvider.minimumLineSpacing
+        }
     }
 }
-*/
+
